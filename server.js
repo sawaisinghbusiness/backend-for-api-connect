@@ -9,6 +9,7 @@ app.use(cors());
 const API_URL = "https://apnasmm.com/api/v2";
 const API_KEY = process.env.API_KEY;
 
+app.get("/", (req, res) => res.json({ ok: true }));
 app.get("/ping", (req, res) => res.json({ ok: true }));
 
 app.post("/order", async (req, res) => {
