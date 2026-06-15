@@ -17,7 +17,7 @@ app.post("/order", async (req, res) => {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ api_token: API_KEY, action: "add", service, link, quantity })
+      body: new URLSearchParams({ key: API_KEY, action: "add", service, link, quantity })
     });
     const data = await response.json();
     res.json(data);
@@ -31,7 +31,7 @@ app.get("/status/:orderId", async (req, res) => {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ api_token: API_KEY, action: "status", order: req.params.orderId })
+      body: new URLSearchParams({ key: API_KEY, action: "status", order: req.params.orderId })
     });
     const data = await response.json();
     res.json(data);
