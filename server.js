@@ -104,6 +104,36 @@ app.post("/cancel", async (req, res) => {
   }
 });
 
+app.post("/refill", async (req, res) => {
+  const { order } = req.body;
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ key: API_KEY, action: "refill", order: order || req.body.orderId })
+    });
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
+app.post("/cancel", async (req, res) => {
+  const { order } = req.body;
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ key: API_KEY, action: "cancel", orders: order || req.body.orderId })
+    });
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
 app.get("/status/:orderId", async (req, res) => {
   try {
     const response = await fetch(API_URL, {
